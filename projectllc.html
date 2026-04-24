@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Tracker</title>
+    <style>
+        /* General body styling for fitness-themed background and layout */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4CAF50 0%, #009688 100%);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* Container for centering and max width */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header section styling */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #e8f5e8;
+            border-radius: 8px;
+        }
+
+        header h1 {
+            color: #2E7D32;
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.2em;
+            margin: 10px 0 0 0;
+        }
+
+        /* Section styling for cards with different colors */
+        section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .workout-history {
+            background-color: #e8f5e8; /* Light green */
+        }
+
+        .weekly-progress {
+            background-color: #b2dfdb; /* Light teal */
+        }
+
+        .personal-best {
+            background-color: #c8e6c9; /* Another light green */
+        }
+
+        .rest-reminder {
+            background-color: #dcedc8; /* Light lime */
+        }
+
+        section h2 {
+            color: #2E7D32;
+            margin-top: 0;
+            border-bottom: 2px solid #2E7D32;
+            padding-bottom: 10px;
+        }
+
+        /* Exercise logging section styling */
+        .exercise-logging {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .exercise-logging input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .exercise-logging button {
+            padding: 10px 20px;
+            background-color: #2E7D32;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .exercise-logging button:hover {
+            background-color: #1B5E20;
+        }
+
+        /* Workout history section styling */
+        .workout-history ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .workout-history li {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Weekly progress section styling */
+        .weekly-progress ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .weekly-progress li {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Personal best section styling */
+        .personal-best ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .personal-best li {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Rest reminder section styling */
+        .rest-reminder p {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            color: #2E7D32;
+            text-align: center;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .exercise-logging {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>Workout Tracker</h1>
+            <p>Track your workouts and improve your fitness</p>
+        </header>
+
+        <!-- Exercise Logging Section -->
+        <section class="exercise-logging">
+            <h2>Log Exercise</h2>
+            <input type="text" placeholder="Exercise name" value="Push Ups">
+            <input type="number" placeholder="Sets" value="3">
+            <input type="number" placeholder="Reps" value="15">
+            <button>Log Workout</button>
+        </section>
+
+        <!-- Workout History Section -->
+        <section class="workout-history">
+            <h2>Workout History</h2>
+            <ul>
+                <li>Push Ups – 3 sets × 15 reps</li>
+                <li>Squats – 4 sets × 12 reps</li>
+                <li>Bench Press – 3 sets × 10 reps</li>
+                <li>Deadlift – 3 sets × 8 reps</li>
+                <li>Plank – 3 sets × 30 seconds</li>
+            </ul>
+        </section>
+
+        <!-- Weekly Progress Summary Section -->
+        <section class="weekly-progress">
+            <h2>Weekly Progress Summary</h2>
+            <ul>
+                <li>Total workouts completed: 5</li>
+                <li>Total exercises performed: 15</li>
+                <li>Total sets completed: 45</li>
+            </ul>
+        </section>
+
+        <!-- Personal Best Tracker Section -->
+        <section class="personal-best">
+            <h2>Personal Best Tracker</h2>
+            <ul>
+                <li>Bench Press: 80 kg</li>
+                <li>Squats: 100 kg</li>
+                <li>Deadlift: 120 kg</li>
+                <li>Overhead Press: 50 kg</li>
+                <li>Barbell Row: 70 kg</li>
+            </ul>
+        </section>
+
+        <!-- Rest Day Reminder Section -->
+        <section class="rest-reminder">
+            <h2>Rest Day Reminder</h2>
+            <p>Remember to take rest on Sunday for muscle recovery!</p>
+        </section>
+    </div>
+</body>
+</html>

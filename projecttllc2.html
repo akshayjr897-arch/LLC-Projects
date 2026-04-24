@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker Plus</title>
+    <style>
+        /* General body styling for soft background and layout */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3e5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container for centering and max width */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header section styling */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #e1bee7;
+            border-radius: 8px;
+        }
+
+        header h1 {
+            color: #7b1fa2;
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.2em;
+            margin: 10px 0 0 0;
+        }
+
+        /* Section styling for cards */
+        section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fafafa;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #7b1fa2;
+            margin-top: 0;
+            border-bottom: 2px solid #7b1fa2;
+            padding-bottom: 10px;
+        }
+
+        /* Add expense section styling */
+        .add-expense {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .add-expense input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .add-expense select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .add-expense button {
+            padding: 10px 20px;
+            background-color: #7b1fa2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-expense button:hover {
+            background-color: #6a1b9a;
+        }
+
+        /* Total expense section styling */
+        .total {
+            text-align: center;
+        }
+
+        .total-box {
+            background-color: #7b1fa2;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 2em;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+
+        /* Category summary section styling */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        /* Daily and weekly report section styling */
+        .daily-report ul, .weekly-report ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .daily-report li, .weekly-report li {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .add-expense {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .daily-report li, .weekly-report li {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>Expense Tracker Plus</h1>
+            <p>Track your spending easily</p>
+        </header>
+
+        <!-- Add Expense Section -->
+        <section class="add-expense">
+            <h2>Add Expense</h2>
+            <input type="number" id="amount" placeholder="Enter amount" value="500">
+            <select id="category">
+                <option value="food">Food</option>
+                <option value="travel">Travel</option>
+                <option value="shopping">Shopping</option>
+                <option value="bills">Bills</option>
+                <option value="entertainment">Entertainment</option>
+            </select>
+            <button id="add-expense-btn">Add Expense</button>
+        </section>
+
+        <!-- Total Expense Section -->
+        <section class="total">
+            <h2>Total Expenses</h2>
+            <div class="total-box" id="total-box">₹5000</div>
+        </section>
+
+        <!-- Category-wise Summary Section -->
+        <section class="category-summary">
+            <h2>Category-wise Summary</h2>
+            <div class="summary-cards" id="summary-cards">
+                <div class="card">Food: ₹1200</div>
+                <div class="card">Travel: ₹800</div>
+                <div class="card">Shopping: ₹1500</div>
+                <div class="card">Bills: ₹1000</div>
+                <div class="card">Entertainment: ₹500</div>
+            </div>
+        </section>
+
+        <!-- Daily Report Section -->
+        <section class="daily-report">
+            <h2>Daily Report</h2>
+            <ul id="daily-list">
+                <li><span>Monday</span> <span>₹500</span></li>
+                <li><span>Tuesday</span> <span>₹300</span></li>
+                <li><span>Wednesday</span> <span>₹700</span></li>
+                <li><span>Thursday</span> <span>₹400</span></li>
+                <li><span>Friday</span> <span>₹600</span></li>
+                <li><span>Saturday</span> <span>₹800</span></li>
+                <li><span>Sunday</span> <span>₹200</span></li>
+            </ul>
+        </section>
+
+        <!-- Weekly Report Section -->
+        <section class="weekly-report">
+            <h2>Weekly Report</h2>
+            <ul id="weekly-list">
+                <li><span>Week 1</span> <span>₹2500</span></li>
+                <li><span>Week 2</span> <span>₹3200</span></li>
+                <li><span>Week 3</span> <span>₹2800</span></li>
+                <li><span>Week 4</span> <span>₹3500</span></li>
+            </ul>
+        </section>
+    </div>
+    <script>
+        // Get elements
+        const amountInput = document.getElementById('amount');
+        const categorySelect = document.getElementById('category');
+        const addExpenseBtn = document.getElementById('add-expense-btn');
+        const totalBox = document.getElementById('total-box');
+        const summaryCards = document.getElementById('summary-cards');
+        const dailyList = document.getElementById('daily-list');
+        const weeklyList = document.getElementById('weekly-list');
+
+        // Initialize data
+        let totalExpenses = 5000;
+        let categorySums = {
+            food: 1200,
+            travel: 800,
+            shopping: 1500,
+            bills: 1000,
+            entertainment: 500
+        };
+        let dailyExpenses = {
+            Monday: 500,
+            Tuesday: 300,
+            Wednesday: 700,
+            Thursday: 400,
+            Friday: 600,
+            Saturday: 800,
+            Sunday: 200
+        };
+        let weeklyExpenses = {
+            'Week 1': 2500,
+            'Week 2': 3200,
+            'Week 3': 2800,
+            'Week 4': 3500
+        };
+
+        // Function to update total
+        function updateTotal() {
+            totalBox.textContent = `₹${totalExpenses}`;
+        }
+
+        // Function to update category summary
+        function updateCategorySummary() {
+            summaryCards.innerHTML = '';
+            for (const [category, sum] of Object.entries(categorySums)) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.textContent = `${category.charAt(0).toUpperCase() + category.slice(1)}: ₹${sum}`;
+                summaryCards.appendChild(card);
+            }
+        }
+
+        // Function to update daily report
+        function updateDailyReport() {
+            dailyList.innerHTML = '';
+            for (const [day, amount] of Object.entries(dailyExpenses)) {
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${day}</span> <span>₹${amount}</span>`;
+                dailyList.appendChild(li);
+            }
+        }
+
+        // Function to update weekly report
+        function updateWeeklyReport() {
+            weeklyList.innerHTML = '';
+            for (const [week, amount] of Object.entries(weeklyExpenses)) {
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${week}</span> <span>₹${amount}</span>`;
+                weeklyList.appendChild(li);
+            }
+        }
+
+        // Add expense event listener
+        addExpenseBtn.addEventListener('click', () => {
+            const amount = parseFloat(amountInput.value);
+            const category = categorySelect.value;
+            if (amount > 0) {
+                // Update total
+                totalExpenses += amount;
+                updateTotal();
+
+                // Update category sum
+                categorySums[category] += amount;
+                updateCategorySummary();
+
+                // Update daily (current day)
+                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                const today = days[new Date().getDay()];
+                dailyExpenses[today] += amount;
+                updateDailyReport();
+
+                // Update weekly (current week of month)
+                const week = `Week ${Math.ceil(new Date().getDate() / 7) || 1}`;
+                if (weeklyExpenses[week]) {
+                    weeklyExpenses[week] += amount;
+                } else {
+                    weeklyExpenses[week] = amount;
+                }
+                updateWeeklyReport();
+
+                // Clear input
+                amountInput.value = '';
+            }
+        });
+
+        // Initial updates
+        updateTotal();
+        updateCategorySummary();
+        updateDailyReport();
+        updateWeeklyReport();
+    </script>
+</body>
+</html>
